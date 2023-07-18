@@ -1,12 +1,11 @@
 package com.dolphinevents.companyservice;
 
 import java.util.List;
-
-
 import org.springframework.stereotype.Service;
 
+
 @Service
-public class CompanyService {
+public class CompanyService implements CompanyServiceInterface{
 
     private CompanyRepository companyRepository;
     
@@ -14,10 +13,12 @@ public class CompanyService {
         this.companyRepository = companyRepository;
     }
 
+    @Override
     public List<Company> findAllCompanies() {
         return companyRepository.findAll();
     }
 
+    @Override
     public Company findCompanyById(Integer id) throws CompanyNotFoundException{
         Company company = companyRepository.findById(id).get();
 
@@ -27,6 +28,7 @@ public class CompanyService {
         return company;
     }
 
+    @Override
     public Company findCompanyByName(String name) throws CompanyNotFoundException{
         Company company = companyRepository.findByName(name);
 
@@ -37,10 +39,12 @@ public class CompanyService {
         return company;
     }
 
-    public void deleteCompanyById(int id) {
+    @Override
+    public void deleteCompanyById(Integer id) {
         companyRepository.deleteById(id);
     }
 
+    @Override
     public Company saveCompany(Company company) {
         companyRepository.save(company);
 
